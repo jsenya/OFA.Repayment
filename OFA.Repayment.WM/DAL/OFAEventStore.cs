@@ -81,9 +81,24 @@ namespace OFA.Repayment.WM.DAL
             return _events;
         }
 
-        public async Task SubscribeToStreamAsync(string streamName)
+        public async Task<bool> SubscribeToStreamAsync(string streamName, string groupName, string username = null, string password = null)
         {
-            throw new NotImplementedException();
+            try
+            {
+                PersistentSubscriptionSettings subSettings = PersistentSubscriptionSettings
+                    .Create().DoNotResolveLinkTos().StartFromCurrent();
+                UserCredentials _creds = new UserCredentials(username ?? _username, password ?? _password);
+
+                await _connection.CreatePersistentSubscriptionAsync(streamName, groupName, subSettings, _creds);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, ExceptionTemplate);
+            }
+
+            return false;
         }
 
         public async Task OpenConnectionAsync()

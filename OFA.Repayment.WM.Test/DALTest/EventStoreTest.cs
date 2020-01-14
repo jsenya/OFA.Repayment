@@ -77,5 +77,21 @@ namespace OFA.Repayment.WM.Test.DALTest
             //assert
             Assert.NotEmpty(items);
         }
+
+        [Fact]
+        public async Task SubscribeToStreamAsync()
+        {
+            //arrange 
+            await _evStore.OpenConnectionAsync();
+            await Task.Delay(1000);
+
+            //act
+            var result = await _evStore.SubscribeToStreamAsync("test-customer-stream", "testers");
+            _evStore.CloseConnection();
+            await Task.Delay(1000);
+
+            //assert
+            Assert.True(result);
+        }
     }
 }

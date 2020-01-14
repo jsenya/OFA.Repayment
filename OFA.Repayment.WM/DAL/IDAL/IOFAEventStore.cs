@@ -16,6 +16,6 @@ namespace OFA.Repayment.WM.DAL.IDAL
         Task<IEnumerable<TEvent>> ReadAllEventsASync<TEvent>(string streamName, long page = 0, 
             int count = 50, string username = null, string password = null) where TEvent : IEvent;
 
-        Task SubscribeToStreamAsync(string streamName);
+        Task<bool> SubscribeToStreamAsync(string streamName, string groupName, string username = null, string password = null);
     }
 }
