@@ -6,6 +6,8 @@ using Serilog;
 using System.Threading.Tasks;
 using EventStore.ClientAPI;
 using static OFA.Repayment.WM.Helpers;
+using EventStore.ClientAPI.SystemData;
+using System.Linq;
 
 namespace OFA.Repayment.WM.DAL
 {
@@ -15,9 +17,12 @@ namespace OFA.Repayment.WM.DAL
         public bool IsOpen { get; private set; }
         private readonly Serilog.ILogger _logger;
         public string ConnectionName { get; set; }
-
+        private readonly string _username;
+        private readonly string _password;
         public OFAEventStore(string userName, string password, string uri, string port, string connectionName)
         {
+            _username = userName;
+            _password = password;
             ConnectionName = connectionName;
             _logger = Log.ForContext<OFAEventStore>();
             _connection = EventStoreConnection.Create(new Uri($"tcp://{userName}:{password}@{uri}:{port}"), ConnectionName);
@@ -45,13 +50,35 @@ namespace OFA.Repayment.WM.DAL
             }
             catch (Exception ex)
             {
-                throw ex;
+                _logger.Error(ex, ExceptionTemplate);
             }
+
+            return false;
         }
 
-        public async Task ReadAllEventsASync(string streamName)
+        public async Task<IEnumerable<TEvent>> ReadAllEventsASync<TEvent>(string streamName, long page = 0, 
+            int count = 50, string username = null, string password = null) where TEvent : IEvent
         {
-            throw new NotImplementedException();
+            List<TEvent> _events = new List<TEvent>();
+            try
+            {
+                UserCredentials _creds = new UserCredentials(username ?? _username, password ?? _password);
+                StreamEventsSlice streamSlice = await _connection.ReadStreamEventsForwardAsync(streamName, page, count, false, _creds);
+
+                if(streamSlice.Events.Length > 0)
+                {
+                    foreach(var @evt in streamSlice.Events)
+                    {
+                       _events.Add(evt.Event.Data.FromBytes<TEvent>());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, ExceptionTemplate);
+            }
+
+            return _events;
         }
 
         public async Task SubscribeToStreamAsync(string streamName)

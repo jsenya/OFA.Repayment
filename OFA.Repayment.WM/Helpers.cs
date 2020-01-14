@@ -15,6 +15,8 @@ namespace OFA.Repayment.WM
             => obj != null ?
             Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(obj)) :
             new byte[0];
+        public static TEvent FromBytes<TEvent>(this byte[] obj)
+            => JsonConvert.DeserializeObject<TEvent>(Encoding.UTF8.GetString(obj));
         public static EventData Payload(this IEvent obj)
         {
             string streamType = "default-unspecified";

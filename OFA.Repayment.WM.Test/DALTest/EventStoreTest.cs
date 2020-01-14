@@ -61,5 +61,21 @@ namespace OFA.Repayment.WM.Test.DALTest
             //assert
             Assert.True(saved);
         }
+
+        [Fact]
+        public async Task ReadAllEventsReturnAllEventsOfStreamFromEventStore()
+        {
+            //arrange 
+            await _evStore.OpenConnectionAsync();
+            await Task.Delay(1000);
+
+            //act
+            var items = await _evStore.ReadAllEventsASync<CustomerCreated>("test-customer-stream");
+            _evStore.CloseConnection();
+            await Task.Delay(1000);
+
+            //assert
+            Assert.NotEmpty(items);
+        }
     }
 }
