@@ -1,26 +1,27 @@
 ﻿using OFA.Repayment.WM.CommandHandlers.ICommandHandlers;
 using OFA.Repayment.WM.Messages.Commands;
-using OFA.Repayment.WM.Messages.Events;
 using System;
+using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using static OFA.Repayment.WM.Test.Helpers;
 
 namespace OFA.Repayment.WM.Test.CommandHandlerTests
 {
-    public class CustomerCommandHandlerTests
+    public class SeasonCommandHandlerTests
     {
-        private readonly ICustomerCommandHandler<CreateCustomer> _handler;
-        public CustomerCommandHandlerTests()
+        private readonly ISeasonCommandHandler<CreateSeason> _handler;
+        public SeasonCommandHandlerTests()
         {
-            _handler = GetCustomerCommandHandler();
+            _handler = GetSeasonCommandHandler();
         }
-
         [Fact]
-        public async Task HandleCreateCustomerCommandShouldCompleteExecutingWithoutErrors()
+        public async Task HandleCreateSeasonCommandShouldCompleteExecutingWithoutErrors()
         {
             //arrange
-            CreateCustomer @event = new CreateCustomer(3, $"user from handler - {DateTime.UtcNow}");
+            CreateSeason @event = new CreateSeason(3, $"season from handler - {DateTime.UtcNow}", 
+                DateTime.UtcNow);
 
             //act
             var _task = _handler.HandleAsync(@event);

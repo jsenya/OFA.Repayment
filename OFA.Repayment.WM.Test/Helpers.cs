@@ -16,8 +16,12 @@ namespace OFA.Repayment.WM.Test
             => new OFAEventStore("admin", "changeit", "localhost", "1113", "test_client");
         public static CustomerRepository GetCustomerRepository()
             => new CustomerRepository(GetOFAEventStore());
+        public static SeasonRepository GetSeasonRepository()
+            => new SeasonRepository(GetOFAEventStore());
         public static CustomerCommandHandler GetCustomerCommandHandler()
             => new CustomerCommandHandler(GetCustomerRepository());
+        public static SeasonCommandHandler GetSeasonCommandHandler()
+            => new SeasonCommandHandler(GetSeasonRepository());
     }
 
     public class SampleData

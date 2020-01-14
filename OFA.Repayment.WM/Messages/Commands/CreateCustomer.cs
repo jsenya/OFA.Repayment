@@ -9,7 +9,6 @@ namespace OFA.Repayment.WM.Messages.Commands
     {
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
-
         public IEvent @event => Apply();
 
         private IEvent Apply()

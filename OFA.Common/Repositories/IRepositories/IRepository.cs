@@ -9,7 +9,6 @@ namespace OFA.Common.Repositories.IRepositories
     public interface IRepository<TId>
     {
         Task SaveAsync(string streamName, IEvent @event);
-        Task GetByIdAsync(TId id);
         Task<IEnumerable<IEvent>> GetAllAsync(TId id);
     }
 }

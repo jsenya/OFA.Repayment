@@ -41,8 +41,4 @@
     <ProjectReference Include="..\OFA.Repayment.WM\OFA.Repayment.WM.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CommandHandlers\" />
-  </ItemGroup>
-
 </Project>
