@@ -1,18 +1,16 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+using OFA.DAL.EventStore.DAL;
+using OFA.DAL.EventStore.DAL.IDAL;
 using System.IO;
-using System.Text;
 
 namespace OFA.Repayment.WM.Test
 {
     public static class Helpers
     {
-        public static SampleData GetSampleData(this string filePath) 
+        public static SampleData GetSampleData(this string filePath)
             => File.Exists(filePath) ? JsonConvert.DeserializeObject<SampleData>(File.ReadAllText(filePath))
             : null;
     }
-
 
     public class SampleData
     {
