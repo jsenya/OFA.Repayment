@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
+using EventStore.ClientAPI;
 
 namespace OFA.Repayment.WM.Test.DALTest
 {
@@ -87,6 +88,26 @@ namespace OFA.Repayment.WM.Test.DALTest
 
             //act
             var result = await _evStore.SubscribeToStreamAsync("test-customer-stream", "testers");
+            _evStore.CloseConnection();
+            await Task.Delay(1000);
+
+            //assert
+            Assert.True(result);
+        }
+
+        [Fact]
+        public async Task ListenAsync()
+        {
+            //arrange 
+            CustomerCreated evt = null;
+            await _evStore.OpenConnectionAsync();
+            await Task.Delay(1000);
+
+            //act
+            var result = await _evStore.SetListenerAsync("test-customer-stream", "testers", (_, x)=> 
+            {
+                evt = x.Event.Data.FromBytes<CustomerCreated>();
+            });
             _evStore.CloseConnection();
             await Task.Delay(1000);
 

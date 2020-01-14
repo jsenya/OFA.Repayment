@@ -1,4 +1,5 @@
-﻿using OFA.Repayment.WM.Messages.Events;
+﻿using EventStore.ClientAPI;
+using OFA.Repayment.WM.Messages.Events;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,5 +18,7 @@ namespace OFA.Repayment.WM.DAL.IDAL
             int count = 50, string username = null, string password = null) where TEvent : IEvent;
 
         Task<bool> SubscribeToStreamAsync(string streamName, string groupName, string username = null, string password = null);
+        Task<bool> SetListenerAsync(string streamName, string groupName, 
+            Action<EventStorePersistentSubscriptionBase, ResolvedEvent> @handler, string username = null, string password = null);
     }
 }

@@ -126,5 +126,21 @@ namespace OFA.Repayment.WM.DAL
                 _logger.Error(ex, ExceptionTemplate);
             }
         }
+
+        public async Task<bool> SetListenerAsync(string streamName, string groupName, Action<EventStorePersistentSubscriptionBase, ResolvedEvent> @handler, string username = null, string password = null)
+        {
+            try
+            {
+                UserCredentials _creds = new UserCredentials(username ?? _username, password ?? _password);
+                await _connection.ConnectToPersistentSubscriptionAsync(streamName, groupName, @handler, (sub, reason, ex) => { }, _creds);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, ExceptionTemplate);
+            }
+
+            return false;
+        }
     }
 }
