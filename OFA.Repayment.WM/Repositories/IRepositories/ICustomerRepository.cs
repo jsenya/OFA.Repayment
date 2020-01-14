@@ -2,7 +2,7 @@
 
 namespace OFA.Repayment.WM.Repositories.IRepositories
 {
-    public interface ICustomerRepository : IRepository
+    public interface ICustomerRepository : IRepository<string>
     {
     }
 }

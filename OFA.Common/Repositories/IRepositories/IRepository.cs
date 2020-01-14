@@ -1,13 +1,15 @@
-﻿using System;
+﻿using OFA.Common.Messages.Events;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace OFA.Common.Repositories.IRepositories
 {
-    public interface IRepository
+    public interface IRepository<TId>
     {
-        Task SaveAsync();
-        Task GetByIdAsync<TId>(TId id);
+        Task SaveAsync(string streamName, IEvent @event);
+        Task GetByIdAsync(TId id);
+        Task<IEnumerable<IEvent>> GetAllAsync(TId id);
     }
 }
