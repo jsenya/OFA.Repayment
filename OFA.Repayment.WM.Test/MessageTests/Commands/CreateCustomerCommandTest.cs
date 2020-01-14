@@ -2,6 +2,7 @@
 using OFA.Repayment.WM.Messages.Events;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 using static OFA.Repayment.WM.Test.Helpers;
@@ -20,7 +21,8 @@ namespace OFA.Repayment.WM.Test.MessageTests.Commands
         public void CreateCustomerCommandShouldReturnAnEvent()
         {
             //arrange
-            CreateCustomer createCustomerCommand = new CreateCustomer(1, "John Doe");
+            Customer customer = _data.Customers.FirstOrDefault();
+            CreateCustomer createCustomerCommand = new CreateCustomer(customer.CustomerID, customer.CustomerName);
 
             //act
             IEvent @event = createCustomerCommand.@event;

@@ -2,6 +2,7 @@
 using OFA.Repayment.WM.Messages.Events;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -19,7 +20,9 @@ namespace OFA.Repayment.WM.Test.MessageTests.Commands
         public void CreateSeasonCommandShouldReturnAnEvent()
         {
             //arrange
-            CreateSeason createCustomerCommand = new CreateSeason(1, "Summer 2020", DateTime.Now.AddDays(30));
+            Season season = _data.Seasons.FirstOrDefault();
+            CreateSeason createCustomerCommand = new CreateSeason(season.SeasonID, season.SeasonName, 
+                DateTime.Parse(season.StartDate));
 
             //act
             IEvent @event = createCustomerCommand.@event;
