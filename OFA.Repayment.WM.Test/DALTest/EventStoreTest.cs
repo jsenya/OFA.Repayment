@@ -1,5 +1,6 @@
 ﻿using OFA.Repayment.WM.DAL;
 using OFA.Repayment.WM.DAL.IDAL;
+using OFA.Repayment.WM.Messages.Events;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -42,6 +43,23 @@ namespace OFA.Repayment.WM.Test.DALTest
 
             //assert
             Assert.False(_evStore.IsOpen);
+        }
+
+        [Fact]
+        public async Task AppendEventShouldWriteEventToEventStore()
+        {
+            //arrange 
+            await _evStore.OpenConnectionAsync();
+            await Task.Delay(1000);
+            var @event = new CustomerCreated(1, $"Demo @ {DateTime.UtcNow}");
+
+            //act
+            var saved = await _evStore.AppendEventAsync("test-customer-stream", @event);
+            _evStore.CloseConnection();
+            await Task.Delay(1000);
+
+            //assert
+            Assert.True(saved);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EventStore.ClientAPI;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -11,6 +12,9 @@ namespace OFA.Repayment.WM.Messages.Events
         public string SeasonName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+
+        public EventData Payload => new EventData(EventId, "season", true, this.ToBytes(), "{}".ToBytes());
+
         public SeasonCreated(int id, string name, DateTime seasonStartDate, DateTime? seasonEndDate = null)
         {
             EventId = Guid.NewGuid();

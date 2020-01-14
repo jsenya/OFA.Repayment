@@ -11,7 +11,7 @@ namespace OFA.Repayment.WM.DAL.IDAL
         bool IsOpen { get; }
         Task OpenConnectionAsync();
         void CloseConnection();
-        Task AppendEventAsync(IEvent @event);
+        Task<bool> AppendEventAsync(string stream, IEvent @event);
 
         Task ReadAllEventsASync(string streamName);
 

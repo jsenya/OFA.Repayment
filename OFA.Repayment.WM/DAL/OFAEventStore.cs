@@ -33,9 +33,20 @@ namespace OFA.Repayment.WM.DAL
             };
         }
 
-        public async Task AppendEventAsync(IEvent @event)
+        public async Task<bool> AppendEventAsync(string stream, IEvent @event)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (!IsOpen) throw new Exception("event store connection is not open.");
+
+                await _connection.AppendToStreamAsync(stream, ExpectedVersion.Any, @event.Payload());
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task ReadAllEventsASync(string streamName)
