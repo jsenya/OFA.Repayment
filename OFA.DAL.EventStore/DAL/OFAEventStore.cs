@@ -1,15 +1,15 @@
-﻿using OFA.Repayment.WM.DAL.IDAL;
-using OFA.Repayment.WM.Messages.Events;
+﻿using EventStore.ClientAPI;
+using EventStore.ClientAPI.SystemData;
+using OFA.Common;
+using OFA.Common.Messages.Events;
+using OFA.DAL.EventStore.DAL.IDAL;
+using Serilog;
 using System;
 using System.Collections.Generic;
-using Serilog;
 using System.Threading.Tasks;
-using EventStore.ClientAPI;
-using static OFA.Repayment.WM.Helpers;
-using EventStore.ClientAPI.SystemData;
-using System.Linq;
+using static OFA.Common.Helpers;
 
-namespace OFA.Repayment.WM.DAL
+namespace OFA.DAL.EventStore.DAL
 {
     public class OFAEventStore : IOFAEventStore
     {

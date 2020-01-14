@@ -5,17 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Aggregates\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="EventStore.Client" Version="6.0.0-preview1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Serilog" Version="2.9.1-dev-01154" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\OFA.Common\OFA.Common.csproj" />
-    <ProjectReference Include="..\OFA.DAL.EventStore\OFA.DAL.EventStore.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,10 @@
-﻿using OFA.Repayment.WM.DAL;
-using OFA.Repayment.WM.DAL.IDAL;
+﻿using OFA.Common;
+using OFA.DAL.EventStore.DAL;
+using OFA.DAL.EventStore.DAL.IDAL;
 using OFA.Repayment.WM.Messages.Events;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using EventStore.ClientAPI;
 
 namespace OFA.Repayment.WM.Test.DALTest
 {
@@ -87,7 +85,7 @@ namespace OFA.Repayment.WM.Test.DALTest
             await Task.Delay(1000);
 
             //act
-            var result = await _evStore.SubscribeToStreamAsync("test-customer-stream", "testers");
+            var result = await _evStore.SubscribeToStreamAsync("test-customer-stream", $"testers-{DateTime.UtcNow}");
             _evStore.CloseConnection();
             await Task.Delay(1000);
 

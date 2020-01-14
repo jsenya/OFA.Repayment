@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace OFA.Repayment.WM.Messages
+namespace OFA.Common.Messages
 {
     public interface IMessage
     {

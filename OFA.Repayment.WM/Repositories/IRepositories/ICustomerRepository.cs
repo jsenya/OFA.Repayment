@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OFA.Common.Repositories.IRepositories;
 
 namespace OFA.Repayment.WM.Repositories.IRepositories
 {

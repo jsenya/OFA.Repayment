@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OFA.Repayment.WM.Repositories.IRepositories
+namespace OFA.Common.Repositories.IRepositories
 {
     public interface IRepository
     {

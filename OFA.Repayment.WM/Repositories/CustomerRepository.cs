@@ -1,8 +1,6 @@
-﻿using OFA.Repayment.WM.DAL.IDAL;
+﻿using OFA.DAL.EventStore.DAL.IDAL;
 using OFA.Repayment.WM.Repositories.IRepositories;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OFA.Repayment.WM.Repositories

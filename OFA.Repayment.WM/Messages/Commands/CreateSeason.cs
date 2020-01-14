@@ -1,7 +1,7 @@
-﻿using OFA.Repayment.WM.Messages.Events;
+﻿using OFA.Common.Messages.Commands;
+using OFA.Common.Messages.Events;
+using OFA.Repayment.WM.Messages.Events;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OFA.Repayment.WM.Messages.Commands
 {

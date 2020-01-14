@@ -1,11 +1,10 @@
 ﻿using EventStore.ClientAPI;
-using OFA.Repayment.WM.Messages.Events;
+using OFA.Common.Messages.Events;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace OFA.Repayment.WM.DAL.IDAL
+namespace OFA.DAL.EventStore.DAL.IDAL
 {
     public interface IOFAEventStore
     {

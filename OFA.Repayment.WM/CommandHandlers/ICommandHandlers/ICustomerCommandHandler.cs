@@ -1,7 +1,4 @@
-﻿using OFA.Repayment.WM.Messages.Events;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using OFA.Common.Messages.Events;
 using System.Threading.Tasks;
 
 namespace OFA.Repayment.WM.CommandHandlers.ICommandHandlers

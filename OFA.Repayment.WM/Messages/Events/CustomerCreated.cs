@@ -1,7 +1,5 @@
-﻿using EventStore.ClientAPI;
+﻿using OFA.Common.Messages.Events;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace OFA.Repayment.WM.Messages.Events
 {

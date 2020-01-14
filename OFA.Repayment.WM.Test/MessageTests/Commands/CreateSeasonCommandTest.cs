@@ -1,9 +1,8 @@
-﻿using OFA.Repayment.WM.Messages.Commands;
+﻿using OFA.Common.Messages.Events;
+using OFA.Repayment.WM.Messages.Commands;
 using OFA.Repayment.WM.Messages.Events;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Xunit;
 
 namespace OFA.Repayment.WM.Test.MessageTests.Commands
