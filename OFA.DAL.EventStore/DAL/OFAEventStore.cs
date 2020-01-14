@@ -42,7 +42,7 @@ namespace OFA.DAL.EventStore.DAL
         {
             try
             {
-                if (!IsOpen) throw new Exception("event store connection is not open.");
+                if (!IsOpen) await OpenConnectionAsync();
 
                 await _connection.AppendToStreamAsync(stream, ExpectedVersion.Any, @event.Payload());
 
@@ -59,6 +59,8 @@ namespace OFA.DAL.EventStore.DAL
         public async Task<IEnumerable<TEvent>> ReadAllEventsASync<TEvent>(string streamName, long page = 0, 
             int count = 50, string username = null, string password = null) where TEvent : IEvent
         {
+            if (!IsOpen) await OpenConnectionAsync();
+
             List<TEvent> _events = new List<TEvent>();
             try
             {
@@ -85,6 +87,7 @@ namespace OFA.DAL.EventStore.DAL
         {
             try
             {
+                if (!IsOpen) await OpenConnectionAsync();
                 PersistentSubscriptionSettings subSettings = PersistentSubscriptionSettings
                     .Create().DoNotResolveLinkTos().StartFromCurrent();
                 UserCredentials _creds = new UserCredentials(username ?? _username, password ?? _password);

@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using OFA.DAL.EventStore.DAL;
 using OFA.DAL.EventStore.DAL.IDAL;
+using OFA.Repayment.WM.CommandHandlers;
+using OFA.Repayment.WM.Repositories;
 using System.IO;
 
 namespace OFA.Repayment.WM.Test
@@ -10,6 +12,12 @@ namespace OFA.Repayment.WM.Test
         public static SampleData GetSampleData(this string filePath)
             => File.Exists(filePath) ? JsonConvert.DeserializeObject<SampleData>(File.ReadAllText(filePath))
             : null;
+        public static OFAEventStore GetOFAEventStore()
+            => new OFAEventStore("admin", "changeit", "localhost", "1113", "test_client");
+        public static CustomerRepository GetCustomerRepository()
+            => new CustomerRepository(GetOFAEventStore());
+        public static CustomerCommandHandler GetCustomerCommandHandler()
+            => new CustomerCommandHandler(GetCustomerRepository());
     }
 
     public class SampleData

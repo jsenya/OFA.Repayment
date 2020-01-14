@@ -1,10 +1,10 @@
-﻿using OFA.Common.Messages.Events;
+﻿using OFA.Common.Messages.Commands;
 using System.Threading.Tasks;
 
 namespace OFA.Repayment.WM.CommandHandlers.ICommandHandlers
 {
-    public interface ICustomerCommandHandler<TEvent> where TEvent : IEvent
+    public interface ICustomerCommandHandler<TCommand> where TCommand : ICommand
     {
-        Task AppendAsync(TEvent @event);
+        Task HandleAsync(TCommand @event);
     }
 }
