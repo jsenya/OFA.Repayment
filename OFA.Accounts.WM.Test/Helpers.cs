@@ -12,7 +12,7 @@ namespace OFA.Accounts.WM.Test
         public static LedgerRepository GetLedgerRepository()
             => new LedgerRepository(GetOFAEventStore());
         public static CustomerSummaryCreatedEventHandler GetCustomerSummaryCreatedEventHandler()
-            => new CustomerSummaryCreatedEventHandler(GetCreateLedgerDebitEntryCommandHandler());
+            => new CustomerSummaryCreatedEventHandler(GetCreateInitialLedgerEntryCommandHandler());
         public static CreateLedgerDebitEntryCommandHandler GetCreateLedgerDebitEntryCommandHandler()
             => new CreateLedgerDebitEntryCommandHandler(GetLedgerRepository());
         public static CreateInitialLedgerEntryCommandHandler GetCreateInitialLedgerEntryCommandHandler()

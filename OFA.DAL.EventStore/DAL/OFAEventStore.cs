@@ -172,7 +172,9 @@ namespace OFA.DAL.EventStore.DAL
             try
             {
                 UserCredentials _creds = new UserCredentials(_username, _password);
-                await _projectionsManager.CreateContinuousAsync(name, query, _creds);
+                var projections = await _projectionsManager.ListContinuousAsync(_creds);
+                if(!projections.Where(q=> q.Name.Equals(name)).Any())
+                    await _projectionsManager.CreateContinuousAsync(name, query, _creds);
             }
             catch (Exception ex)
             {

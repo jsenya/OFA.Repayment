@@ -25,7 +25,7 @@ namespace OFA.Accounts.WM.Test.CommandHandlerTests
         public async Task HandleCreateGLDebitEntryCommandShouldCompleteExecutingWithoutErrors()
         {
             //arrange
-            var command = new CreateLedgerDebitEntry(14, 2750, 0, "loan repayment", Guid.NewGuid(), 180);
+            var command = new CreateLedgerDebitEntry(14, 2750, 0, 100, "loan repayment", Guid.NewGuid(), 180);
 
             //act
             var _task = _handler.HandleAsync(command);
@@ -39,7 +39,7 @@ namespace OFA.Accounts.WM.Test.CommandHandlerTests
         public async Task HandleCreateInitialGLEntryCommandShouldCompleteExecutingWithoutErrors()
         {
             //arrange
-            var command = new CreateInitialLedgerEntry(14, 2750, 0, "Opening Balance", Guid.NewGuid(), 180);
+            var command = new CreateInitialLedgerEntry(14, 2750, 0, 0, "Opening Balance", Guid.NewGuid(), 180);
 
             //act
             var _task = _handler2.HandleAsync(command);

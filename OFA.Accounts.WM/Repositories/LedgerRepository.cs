@@ -1,4 +1,6 @@
-﻿using OFA.Accounts.WM.Messages.Events;
+﻿using Newtonsoft.Json;
+using OFA.Accounts.WM.Messages.Events;
+using OFA.Accounts.WM.Projections;
 using OFA.Accounts.WM.Repositories.IRepositories;
 using OFA.Common.Messages.Events;
 using OFA.DAL.EventStore.DAL.IDAL;
@@ -21,9 +23,25 @@ namespace OFA.Accounts.WM.Repositories
 
         public async Task SaveAsync(string streamName, IEvent @event)
             => await _eventStore.AppendEventAsync(streamName, @event);
-        public Task GetActiveAccountAsync(string accountName)
+        public async Task<GlEntry> GetPendingEntriesAsync(string projectionName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _eventStore.GetProjectionResultAsync(projectionName);
+
+                if (!string.IsNullOrEmpty(result))
+                    return JsonConvert.DeserializeObject<GlEntry>(result);
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
+
+        public async Task CreateProjectionAsync(string projectionName, string query)
+            => await _eventStore.CreateProjectionAsync(projectionName, query);
     }
 }

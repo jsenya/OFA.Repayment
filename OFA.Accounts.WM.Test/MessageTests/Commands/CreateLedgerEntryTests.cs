@@ -14,7 +14,7 @@ namespace OFA.Accounts.WM.Test.MessageTests.Commands
         public void CreateCustomerCommandShouldReturnAnEvent()
         {
             //arrange
-            CreateLedgerDebitEntry createCustomerCommand = new CreateLedgerDebitEntry(1, 1000, 0, "test transaction", Guid.NewGuid(), 180);
+            CreateLedgerDebitEntry createCustomerCommand = new CreateLedgerDebitEntry(1, 1000, 0, 100, "test transaction", Guid.NewGuid(), 180);
 
             //act
             IEvent @event = createCustomerCommand.@event;
