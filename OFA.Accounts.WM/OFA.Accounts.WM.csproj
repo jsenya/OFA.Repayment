@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OFA.Common\OFA.Common.csproj" />
+    <ProjectReference Include="..\OFA.DAL.EventStore\OFA.DAL.EventStore.csproj" />
+  </ItemGroup>
+
+</Project>

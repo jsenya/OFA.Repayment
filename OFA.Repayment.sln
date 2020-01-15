@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.DAL.EventStore.Test", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Common", "OFA.Common\OFA.Common.csproj", "{D31EA485-2999-4BB7-851F-92A23DB74E02}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Accounts.WM", "OFA.Accounts.WM\OFA.Accounts.WM.csproj", "{8C4265CC-EB6F-41E0-A181-0C795544ACF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Accounts.WM.Test", "OFA.Accounts.WM.Test\OFA.Accounts.WM.Test.csproj", "{66B5A839-9D79-43A5-905A-BEE87DD7D665}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{D31EA485-2999-4BB7-851F-92A23DB74E02}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D31EA485-2999-4BB7-851F-92A23DB74E02}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D31EA485-2999-4BB7-851F-92A23DB74E02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C4265CC-EB6F-41E0-A181-0C795544ACF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C4265CC-EB6F-41E0-A181-0C795544ACF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C4265CC-EB6F-41E0-A181-0C795544ACF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C4265CC-EB6F-41E0-A181-0C795544ACF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66B5A839-9D79-43A5-905A-BEE87DD7D665}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66B5A839-9D79-43A5-905A-BEE87DD7D665}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66B5A839-9D79-43A5-905A-BEE87DD7D665}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66B5A839-9D79-43A5-905A-BEE87DD7D665}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
