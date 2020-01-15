@@ -11,7 +11,7 @@ namespace OFA.Accounts.WM.Test.CommandHandlerTests
 {
     public class AccountCreatedCommandHandlerTests
     {
-        private readonly IAccountCreatedCommandHandler<CreateAccount> _handler;
+        private readonly ICreateAccountCommandHandler<CreateAccount> _handler;
         public AccountCreatedCommandHandlerTests()
         {
             _handler = GetAccountCreatedCommandHandler();
@@ -21,7 +21,7 @@ namespace OFA.Accounts.WM.Test.CommandHandlerTests
         public async Task HandleCreateAccountCommandShouldCompleteExecutingWithoutErrors()
         {
             //arrange
-            CreateAccount command = new CreateAccount(3, 180);
+            CreateAccount command = new CreateAccount(3, 180, Guid.NewGuid());
 
             //act
             var _task = _handler.HandleAsync(command);

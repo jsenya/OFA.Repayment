@@ -10,8 +10,8 @@ namespace OFA.Accounts.WM.EventHandlers
 {
     public class CustomerSummaryCreatedEventHandler : ICustomerSummaryCreatedEventHandler<CustomerSummaryCreated>
     {
-        private readonly IAccountCreatedCommandHandler<CreateAccount> _accountCreatedCH;
-        public CustomerSummaryCreatedEventHandler(IAccountCreatedCommandHandler<CreateAccount> accCreatedCH)
+        private readonly ICreateAccountCommandHandler<CreateAccount> _accountCreatedCH;
+        public CustomerSummaryCreatedEventHandler(ICreateAccountCommandHandler<CreateAccount> accCreatedCH)
         {
             _accountCreatedCH = accCreatedCH;
         }
@@ -20,7 +20,7 @@ namespace OFA.Accounts.WM.EventHandlers
             try
             {
                 //create a corresponding command to create a loan account for the customer summary that has just come in
-                CreateAccount command = new CreateAccount(@event.CustomerId, @event.SeasonId);
+                CreateAccount command = new CreateAccount(@event.CustomerId, @event.SeasonId, @event.EventId);
                 await _accountCreatedCH.HandleAsync(command);
             }
             catch (Exception ex)

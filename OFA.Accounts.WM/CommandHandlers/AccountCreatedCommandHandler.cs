@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace OFA.Accounts.WM.CommandHandlers
 {
-    public class AccountCreatedCommandHandler : IAccountCreatedCommandHandler<CreateAccount>
+    public class CreateAccountCommandHandler : ICreateAccountCommandHandler<CreateAccount>
     {
         private readonly IAccountRepository _repository;
-        public AccountCreatedCommandHandler(IAccountRepository repository)
+        public CreateAccountCommandHandler(IAccountRepository repository)
         {
             _repository = repository;
         }

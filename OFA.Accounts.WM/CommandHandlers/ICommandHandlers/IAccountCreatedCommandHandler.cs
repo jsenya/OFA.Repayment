@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OFA.Accounts.WM.CommandHandlers.ICommandHandlers
 {
-    public interface IAccountCreatedCommandHandler<TCommand> where TCommand : ICommand
+    public interface ICreateAccountCommandHandler<TCommand> where TCommand : ICommand
     {
         Task HandleAsync(TCommand command);
     }

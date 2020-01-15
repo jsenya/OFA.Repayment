@@ -11,8 +11,8 @@ namespace OFA.Accounts.WM.Test
             => new OFAEventStore("admin", "changeit", "localhost", "1113", "test_client");
         public static AccountRepository GetAccountRepository()
             => new AccountRepository(GetOFAEventStore());
-        public static AccountCreatedCommandHandler GetAccountCreatedCommandHandler()
-            => new AccountCreatedCommandHandler(GetAccountRepository());
+        public static CreateAccountCommandHandler GetAccountCreatedCommandHandler()
+            => new CreateAccountCommandHandler(GetAccountRepository());
         public static CustomerSummaryCreatedEventHandler GetCustomerSummaryCreatedEventHandler()
             => new CustomerSummaryCreatedEventHandler(GetAccountCreatedCommandHandler());
     }

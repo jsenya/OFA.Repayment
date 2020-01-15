@@ -14,7 +14,7 @@ namespace OFA.Accounts.WM.Test.MessageTests.Commands
         public void CreateCustomerCommandShouldReturnAnEvent()
         {
             //arrange
-            CreateAccount createCustomerCommand = new CreateAccount(1, 180);
+            CreateAccount createCustomerCommand = new CreateAccount(1, 180, Guid.NewGuid());
 
             //act
             IEvent @event = createCustomerCommand.@event;

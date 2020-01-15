@@ -4,10 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OFA.Accounts.WM.CommandHandlers;
 using OFA.Accounts.WM.CommandHandlers.ICommandHandlers;
+using OFA.Accounts.WM.EventHandlers;
 using OFA.Accounts.WM.EventHandlers.IEventHandlers;
 using OFA.Accounts.WM.Messages.Commands;
 using OFA.Accounts.WM.Messages.Events;
+using OFA.Accounts.WM.Repositories;
 using OFA.DAL.EventStore.DAL;
 using OFA.DAL.EventStore.DAL.IDAL;
 
@@ -24,11 +27,14 @@ namespace OFA.Accounts.WM.BgWorker
             Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
-                    var eStore = new OFAEventStore("admin", "changeit", "localhost", "1113", "test_client");
+                    var _evStore = new OFAEventStore("admin", "changeit", "localhost", "1113", "test_client");
+                    var _accCreatedCH = new CreateAccountCommandHandler(new AccountRepository(_evStore));
+                    var _custSummaryEH = new CustomerSummaryCreatedEventHandler(_accCreatedCH);
+
                     services.AddHostedService<Worker>();
-                    services.AddSingleton<IOFAEventStore>(eStore);
-                    //services.AddSingleton<IAccountCreatedCommandHandler<CreateAccount>>();
-                    //services.AddSingleton<ICustomerSummaryCreatedEventHandler<CustomerSummaryCreated>>();
+                    services.AddSingleton<IOFAEventStore>(_evStore);
+                    services.AddSingleton<ICreateAccountCommandHandler<CreateAccount>>(_accCreatedCH);
+                    services.AddSingleton<ICustomerSummaryCreatedEventHandler<CustomerSummaryCreated>>(_custSummaryEH);
                 });
     }
 }
