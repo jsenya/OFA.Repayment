@@ -32,7 +32,7 @@ namespace OFA.Repayment.WM.API.Controllers
             foreach (var customer in _sampleData.Customers)
             {
                 CreateCustomer command = new CreateCustomer(customer.CustomerID, customer.CustomerName);
-                await _customerCH.HandleAsync(command);
+                _customerCH.HandleAsync(command);
             }
 
             //create seasons
@@ -40,14 +40,14 @@ namespace OFA.Repayment.WM.API.Controllers
             {
                 CreateSeason command = new CreateSeason(season.SeasonID, season.SeasonName,
                 DateTime.Parse(season.StartDate));
-                await _seasonCH.HandleAsync(command);
+                _seasonCH.HandleAsync(command);
             }
 
             //create summaries
             foreach (var customerSummary in _sampleData.CustomerSummaries)
             {
                 CreateCustomerSummary command = new CreateCustomerSummary(customerSummary.CustomerID, customerSummary.SeasonID, customerSummary.Credit, customerSummary.TotalRepaid);
-                await _custSummaryCH.HandleAsync(command);
+                _custSummaryCH.HandleAsync(command);
             }
 
 

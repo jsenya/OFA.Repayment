@@ -33,15 +33,12 @@ namespace OFA.Accounts.WM.BgWorker
             //subscribe to customer summary events
             var subscriptionCreated = await _eventStore.SubscribeToStreamAsync("customer-summary", "gl-manager");
 
-            if(subscriptionCreated)
+            await _eventStore.SetListenerAsync("customer-summary", "gl-manager", async (_, x) =>
             {
-                await _eventStore.SetListenerAsync("customer-summary", "account-management", async (_, x) =>
-                {
-                    var evt = x.Event.Data.FromBytes<CustomerSummaryCreated>();
-                    Console.WriteLine($"processing @ {DateTime.UtcNow} \n-> {JsonConvert.SerializeObject(evt)}");
-                    await _custSummaryCreatedEH.HandlerAsync(evt);
-                });
-            }
+                var evt = x.Event.Data.FromBytes<CustomerSummaryCreated>();
+                Console.WriteLine($"processing @ {DateTime.UtcNow} \n-> {JsonConvert.SerializeObject(evt)}");
+                await _custSummaryCreatedEH.HandlerAsync(evt);
+            });
         }
     }
 }

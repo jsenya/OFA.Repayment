@@ -18,7 +18,7 @@ namespace OFA.Accounts.WM.Messages.Commands
         public int Credit { get; set; }
         public int Balance { get; set; }
         public string Details { get; set; }
-        public CreateLedgerDebitEntry(int custId, int debit, int credit, string details,Guid correlationId, int? seasonId = null)
+        public CreateLedgerDebitEntry(int custId, int debit, int credit, int balance, string details,Guid correlationId, int? seasonId = null)
         {
             if (custId == 0) throw new Exception("Customer id is invalid");
             if (debit < 0) throw new Exception("Invalid debit amount.");
@@ -31,12 +31,13 @@ namespace OFA.Accounts.WM.Messages.Commands
             Credit = credit;
             Details = details;
             AccountName = $"{custId}/{seasonId.ToString() ?? "ANY"}";
+            Balance = balance;
         }
         private IEvent Apply()
         {
             try
             {
-                return new LedgerDebitEntryCreated(CustomerId, (int)SeasonId, AccountName, Debit, Credit, CorrelationId);
+                return new LedgerDebitEntryCreated(CustomerId, (int)SeasonId, AccountName, Debit, Credit, Balance, CorrelationId);
             }
             catch (Exception)
             {

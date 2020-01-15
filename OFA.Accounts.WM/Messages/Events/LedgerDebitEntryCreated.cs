@@ -15,7 +15,7 @@ namespace OFA.Accounts.WM.Messages.Events
         public int Debit { get; set; }
         public int Credit { get; set; }
         public int Balance { get; set; }
-        public LedgerDebitEntryCreated(int custId, int seasonId, string accName, int debit, int credit, Guid correlationId)
+        public LedgerDebitEntryCreated(int custId, int seasonId, string accName, int debit, int credit, int balance, Guid correlationId)
         {
             EventId = Guid.NewGuid();
             CorrelationId = correlationId;
@@ -24,6 +24,7 @@ namespace OFA.Accounts.WM.Messages.Events
             Debit = debit;
             Credit = credit;
             AccountName = accName;
+            Balance = balance;
         }
     }
 }
