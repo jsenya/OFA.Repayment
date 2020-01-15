@@ -21,7 +21,7 @@ namespace OFA.Repayment.WM.Test.CommandHandlerTests
         public async Task HandleCreateCustomerSummaryCommandShouldCompleteExecutingWithoutErrors()
         {
             //arrange
-            CreateCustomerSummary command = new CreateCustomerSummary(53, 113, 26000, 1190);
+            CreateCustomerSummary command = new CreateCustomerSummary(54, 114, 26900, 1190);
 
             //act
             var _task = _handler.HandleAsync(command);
