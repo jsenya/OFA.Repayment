@@ -3,23 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Repayment.WM", "OFA.Repayment.WM\OFA.Repayment.WM.csproj", "{976D8888-847D-4632-9A4E-ED425B035102}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OFA.Repayment.WM", "OFA.Repayment.WM\OFA.Repayment.WM.csproj", "{976D8888-847D-4632-9A4E-ED425B035102}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Repayment.WM.Test", "OFA.Repayment.WM.Test\OFA.Repayment.WM.Test.csproj", "{1AF09BCB-81B1-4452-87C4-061E53180191}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OFA.Repayment.WM.Test", "OFA.Repayment.WM.Test\OFA.Repayment.WM.Test.csproj", "{1AF09BCB-81B1-4452-87C4-061E53180191}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.DAL.EventStore", "OFA.DAL.EventStore\OFA.DAL.EventStore.csproj", "{CCE7FF46-629D-408B-B3A3-A2E707FD7E9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OFA.DAL.EventStore", "OFA.DAL.EventStore\OFA.DAL.EventStore.csproj", "{CCE7FF46-629D-408B-B3A3-A2E707FD7E9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.DAL.EventStore.Test", "OFA.DAL.EventStore.Test\OFA.DAL.EventStore.Test.csproj", "{0CB63E98-D03A-4BB8-9530-12F72A3FB320}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OFA.DAL.EventStore.Test", "OFA.DAL.EventStore.Test\OFA.DAL.EventStore.Test.csproj", "{0CB63E98-D03A-4BB8-9530-12F72A3FB320}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Common", "OFA.Common\OFA.Common.csproj", "{D31EA485-2999-4BB7-851F-92A23DB74E02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OFA.Common", "OFA.Common\OFA.Common.csproj", "{D31EA485-2999-4BB7-851F-92A23DB74E02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Accounts.WM", "OFA.Accounts.WM\OFA.Accounts.WM.csproj", "{8C4265CC-EB6F-41E0-A181-0C795544ACF8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OFA.Accounts.WM", "OFA.Accounts.WM\OFA.Accounts.WM.csproj", "{8C4265CC-EB6F-41E0-A181-0C795544ACF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Accounts.WM.Test", "OFA.Accounts.WM.Test\OFA.Accounts.WM.Test.csproj", "{66B5A839-9D79-43A5-905A-BEE87DD7D665}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OFA.Accounts.WM.Test", "OFA.Accounts.WM.Test\OFA.Accounts.WM.Test.csproj", "{66B5A839-9D79-43A5-905A-BEE87DD7D665}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Accounts.WM.BgWorker", "OFA.Accounts.WM.BgWorker\OFA.Accounts.WM.BgWorker.csproj", "{3FCA98FB-0C00-4A03-9575-191B91152684}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OFA.Accounts.WM.BgWorker", "OFA.Accounts.WM.BgWorker\OFA.Accounts.WM.BgWorker.csproj", "{3FCA98FB-0C00-4A03-9575-191B91152684}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Repayment.WM.API", "OFA.Repayment.WM.API\OFA.Repayment.WM.API.csproj", "{CE416542-612E-4258-8398-4AE0414FBC2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OFA.Repayment.WM.API", "OFA.Repayment.WM.API\OFA.Repayment.WM.API.csproj", "{CE416542-612E-4258-8398-4AE0414FBC2F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Accounts.WM.API", "OFA.Accounts.WM.API\OFA.Accounts.WM.API.csproj", "{C99E9EAC-8697-4742-AB47-8F40AE66A404}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{CE416542-612E-4258-8398-4AE0414FBC2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE416542-612E-4258-8398-4AE0414FBC2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE416542-612E-4258-8398-4AE0414FBC2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C99E9EAC-8697-4742-AB47-8F40AE66A404}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C99E9EAC-8697-4742-AB47-8F40AE66A404}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C99E9EAC-8697-4742-AB47-8F40AE66A404}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C99E9EAC-8697-4742-AB47-8F40AE66A404}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
