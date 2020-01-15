@@ -95,7 +95,7 @@ namespace OFA.DAL.EventStore.DAL
             {
                 if (!IsOpen) await OpenConnectionAsync();
                 PersistentSubscriptionSettings subSettings = PersistentSubscriptionSettings
-                    .Create().DoNotResolveLinkTos().StartFromCurrent();
+                    .Create().DoNotResolveLinkTos().StartFromBeginning();
                 UserCredentials _creds = new UserCredentials(username ?? _username, password ?? _password);
 
                 await _connection.CreatePersistentSubscriptionAsync(streamName, groupName, subSettings, _creds);

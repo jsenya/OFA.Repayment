@@ -28,14 +28,26 @@ namespace OFA.Accounts.WM.CommandHandlers
 
                 //1. get the oldest PENDING season entry from ledger
                 var _entry = await _repository.GetPendingEntriesAsync(projectionName);
+
                 //2. create entry
+                int balance = 0;
                 if(_entry.items.Length > 0)
                 {
-                    command.Balance = CalculateRunningBalance(command.Debit, command.Credit, _entry.items[0].Balance);
+                    balance = CalculateRunningBalance(command.Debit, command.Credit, _entry.items[0].Balance);
+                    command.SeasonId = command.SeasonId ?? _entry.items[0].SeasonId;
                 }
 
-                //5. if balance is less than zero mark current season as repaid and create a new debit entry
+                if(balance >= 0)
+                    command.Balance = balance;
+
                 await _repository.SaveAsync("loan-ledger", command.@event);
+
+                //5. if balance is less than zero create a readjustment debit entry for the same season
+                if (balance < 0)
+                {
+                    var readjustment = new CreateLedgerAdjustmentEntry(command.CustomerId, (int)command.SeasonId, Math.Abs(balance), 0, CalculateRunningBalance(Math.Abs(balance), 0, command.Balance), command.@event.EventId);
+                    await _repository.SaveAsync("loan-ledger", readjustment.@event);
+                }
             }
             catch (Exception ex)
             {

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OFA.Accounts.WM.Messages.Events
 {
-    public class LedgerDebitEntryCreated : IEvent
+    public class LedgerAdjustmentEntryCreated : IEvent
     {
         public Guid EventId { get; private set; }
         public Guid CorrelationId { get; set; }
@@ -16,17 +16,21 @@ namespace OFA.Accounts.WM.Messages.Events
         public int Credit { get; set; }
         public int Balance { get; set; }
         public string Details { get; set; }
-        public LedgerDebitEntryCreated(int custId, int seasonId, string accName, int debit, int credit, int balance, string details, Guid correlationId)
+
+        public LedgerAdjustmentEntryCreated(int custId, int seasonId, int debit, int credit, int balance, Guid correlationId)
         {
+            if (custId == 0) throw new Exception("Customer id is invalid");
+            if (credit < 0) throw new Exception("Invalid credit amount.");
+
             EventId = Guid.NewGuid();
             CorrelationId = correlationId;
             CustomerId = custId;
             SeasonId = seasonId;
-            Debit = debit;
             Credit = credit;
-            AccountName = accName;
+            Debit = debit;
+            Details = "adjustment repayment";
+            AccountName = $"{custId}/{seasonId.ToString() ?? "ANY"}";
             Balance = balance;
-            Details = details;
         }
     }
 }

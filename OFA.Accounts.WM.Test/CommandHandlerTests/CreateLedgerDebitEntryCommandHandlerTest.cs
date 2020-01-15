@@ -25,7 +25,7 @@ namespace OFA.Accounts.WM.Test.CommandHandlerTests
         public async Task HandleCreateGLDebitEntryCommandShouldCompleteExecutingWithoutErrors()
         {
             //arrange
-            var command = new CreateLedgerDebitEntry(14, 2750, 0, 100, "loan repayment", Guid.NewGuid(), 180);
+            var command = new CreateLedgerDebitEntry(1, 1000, 0, 0, "original payment", Guid.NewGuid());
 
             //act
             var _task = _handler.HandleAsync(command);
