@@ -1,6 +1,4 @@
-﻿using OFA.Accounts.WM.Messages.Commands;
-using OFA.Common.Handlers;
-using OFA.Common.Messages.Commands;
+﻿using OFA.Common.Messages.Commands;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OFA.Accounts.WM.CommandHandlers.ICommandHandlers
 {
-    public interface ICreateAccountCommandHandler<TCommand> where TCommand : ICommand
+    public interface ICreateLedgerDebitEntryCommandHandler<TCommand> where TCommand : ICommand
     {
         Task HandleAsync(TCommand command);
     }

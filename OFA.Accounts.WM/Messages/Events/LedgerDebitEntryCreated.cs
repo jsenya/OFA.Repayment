@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OFA.Accounts.WM.Messages.Events
 {
-    public class LedgerEntryCreated : IEvent
+    public class LedgerDebitEntryCreated : IEvent
     {
         public Guid EventId { get; private set; }
         public Guid CorrelationId { get; set; }
@@ -15,8 +15,9 @@ namespace OFA.Accounts.WM.Messages.Events
         public int Debit { get; set; }
         public int Credit { get; set; }
         public int Balance { get; set; }
-        public LedgerEntryCreated(int custId, int seasonId, string accName, int debit, int credit, Guid correlationId)
+        public LedgerDebitEntryCreated(int custId, int seasonId, string accName, int debit, int credit, Guid correlationId)
         {
+            EventId = Guid.NewGuid();
             CorrelationId = correlationId;
             CustomerId = custId;
             SeasonId = seasonId;

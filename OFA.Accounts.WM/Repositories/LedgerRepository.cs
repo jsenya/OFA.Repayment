@@ -17,7 +17,7 @@ namespace OFA.Accounts.WM.Repositories
             _eventStore = eventStore;
         }
         public async Task<IEnumerable<IEvent>> GetAllAsync(string id)
-            => await _eventStore.ReadAllEventsASync<LedgerEntryCreated>(id);
+            => await _eventStore.ReadAllEventsASync<LedgerDebitEntryCreated>(id);
 
         public async Task SaveAsync(string streamName, IEvent @event)
             => await _eventStore.AppendEventAsync(streamName, @event);

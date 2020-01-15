@@ -19,14 +19,12 @@ namespace OFA.Accounts.WM.BgWorker
     {
         private readonly ILogger<Worker> _logger;
         private readonly IOFAEventStore _eventStore;
-        private readonly ICreateAccountCommandHandler<CreateAccount> _accCreatedCH;
         private readonly ICustomerSummaryCreatedEventHandler<CustomerSummaryCreated> _custSummaryCreatedEH;
 
-        public Worker(ILogger<Worker> logger, IOFAEventStore eStore, ICreateAccountCommandHandler<CreateAccount> accCreatedCH, ICustomerSummaryCreatedEventHandler<CustomerSummaryCreated> custSummaryCreatedEH)
+        public Worker(ILogger<Worker> logger, IOFAEventStore eStore, ICustomerSummaryCreatedEventHandler<CustomerSummaryCreated> custSummaryCreatedEH)
         {
             _logger = logger;
             _eventStore = eStore;
-            _accCreatedCH = accCreatedCH;
             _custSummaryCreatedEH = custSummaryCreatedEH;
         }
 
@@ -39,17 +37,6 @@ namespace OFA.Accounts.WM.BgWorker
                 var evt = x.Event.Data.FromBytes<CustomerSummaryCreated>();
                 Console.WriteLine($"processing @ {DateTime.UtcNow} \n-> {JsonConvert.SerializeObject(evt)}");
                 await _custSummaryCreatedEH.HandlerAsync(evt);
-            });
-
-            //subscribe to account created events
-            await _eventStore.SubscribeToStreamAsync("accounts", "gl-management");
-            await _eventStore.SetListenerAsync("accounts", "gl-management", async (_, x) =>
-            {
-                var evt = x.Event.Data.FromBytes<AccountCreated>();
-                Console.WriteLine($"processing @ {DateTime.UtcNow} \n-> {JsonConvert.SerializeObject(evt)}");
-                //await _custSummaryCreatedEH.HandlerAsync(evt);
-
-                //get summary details
             });
         }
     }

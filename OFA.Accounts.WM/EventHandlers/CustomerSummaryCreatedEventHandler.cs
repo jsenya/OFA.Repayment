@@ -10,18 +10,32 @@ namespace OFA.Accounts.WM.EventHandlers
 {
     public class CustomerSummaryCreatedEventHandler : ICustomerSummaryCreatedEventHandler<CustomerSummaryCreated>
     {
-        private readonly ICreateAccountCommandHandler<CreateAccount> _accountCreatedCH;
-        public CustomerSummaryCreatedEventHandler(ICreateAccountCommandHandler<CreateAccount> accCreatedCH)
+        //private readonly ICreateAccountCommandHandler<CreateAccount> _accountCreatedCH;
+        private readonly ICreateLedgerDebitEntryCommandHandler<CreateLedgerDebitEntry> _createLedgerDebitEntryCH;
+        public CustomerSummaryCreatedEventHandler(ICreateLedgerDebitEntryCommandHandler<CreateLedgerDebitEntry> createLedgerDebitEntryCH)
         {
-            _accountCreatedCH = accCreatedCH;
+            //_accountCreatedCH = accCreatedCH;
+            _createLedgerDebitEntryCH = createLedgerDebitEntryCH;
         }
         public async Task HandlerAsync(CustomerSummaryCreated @event)
         {
             try
             {
-                //create a corresponding command to create a loan account for the customer summary that has just come in
-                CreateAccount command = new CreateAccount(@event.CustomerId, @event.SeasonId, @event.EventId);
-                await _accountCreatedCH.HandleAsync(command);
+                ////create a corresponding command to create a loan account for the customer summary that has just come in
+                //CreateAccount command = new CreateAccount(@event.CustomerId, @event.SeasonId, @event.EventId);
+                //await _accountCreatedCH.HandleAsync(command);
+
+                ////create 2 intial ledger entries
+                ////1.) opening balance
+                //var ob = new CreateInitialLedgerEntry(@event.CustomerId, 0, 0, "Opening Balance", @event.EventId, @event.SeasonId);
+                //await _createLedgerDebitEntryCH.HandleAsync(ob);
+                ////2.) first credit payment
+                //var cr = new CreateInitialLedgerEntry(@event.CustomerId, 0, @event.TotalAmountOwed, "Loan credit", @event.EventId, @event.SeasonId);
+                //await _createLedgerDebitEntryCH.HandleAsync(cr);
+                ////3.) first down payment
+                //var dr = new CreateInitialLedgerEntry(@event.CustomerId, @event.TotalAmountRepaid, 0, "Downpayment", @event.EventId, @event.SeasonId);
+                //await _createLedgerDebitEntryCH.HandleAsync(dr);
+                await Task.CompletedTask;
             }
             catch (Exception ex)
             {
