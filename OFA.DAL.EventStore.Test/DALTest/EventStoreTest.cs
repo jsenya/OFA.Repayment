@@ -70,8 +70,6 @@ namespace OFA.Repayment.WM.Test.DALTest
 
             //act
             var items = await _evStore.ReadAllEventsASync<CustomerCreated>("test-customer-stream");
-            _evStore.CloseConnection();
-            await Task.Delay(1000);
 
             //assert
             Assert.NotEmpty(items);
@@ -93,40 +91,51 @@ namespace OFA.Repayment.WM.Test.DALTest
             Assert.True(result);
         }
 
+        //[Fact]
+        //public async Task ListenAsync()
+        //{
+        //    //arrange 
+        //    CustomerCreated evt = null;
+        //    await _evStore.OpenConnectionAsync();
+        //    await Task.Delay(1000);
+
+        //    //act
+        //    var result = await _evStore.SetListenerAsync("customer", "testers", (_, x)=> 
+        //    {
+        //        evt = x.Event.Data.FromBytes<CustomerCreated>();
+        //    });
+
+        //    //assert
+        //    Assert.True(result);
+        //}
+
         [Fact]
-        public async Task ListenAsync()
+        public async Task CreateProjection()
         {
             //arrange 
-            CustomerCreated evt = null;
             await _evStore.OpenConnectionAsync();
             await Task.Delay(1000);
 
             //act
-            var result = await _evStore.SetListenerAsync("test-customer-stream", "testers", (_, x)=> 
-            {
-                evt = x.Event.Data.FromBytes<CustomerCreated>();
-            });
-            _evStore.CloseConnection();
-            await Task.Delay(1000);
+            var _task = _evStore.CreateProjectionAsync($"somequery{DateTime.UtcNow}", "fromStream('customer-summary').when({$init: function(){return {items: []}},CustomerSummaryCreated: function(s,e){if(e.body.CustomerId === 53)s.items.push(e.body);}});");
+            await _task;
 
             //assert
-            Assert.True(result);
+            Assert.True(_task.IsCompleted);
         }
 
         [Fact]
-        public async Task ListProjectionsAsync()
+        public async Task GetProjectionResult()
         {
             //arrange 
             await _evStore.OpenConnectionAsync();
             await Task.Delay(1000);
 
             //act
-            await _evStore.ListProjectionsAsync();
-            _evStore.CloseConnection();
-            await Task.Delay(1000);
+            var result = await _evStore.GetProjectionResultAsync("somequery55");
 
             //assert
-            Assert.True(1==1);
+            Assert.NotNull(result);
         }
     }
 }

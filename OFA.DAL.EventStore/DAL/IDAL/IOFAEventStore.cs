@@ -19,6 +19,7 @@ namespace OFA.DAL.EventStore.DAL.IDAL
         Task<bool> SubscribeToStreamAsync(string streamName, string groupName, string username = null, string password = null);
         Task<bool> SetListenerAsync(string streamName, string groupName, 
             Action<EventStorePersistentSubscriptionBase, ResolvedEvent> @handler, string username = null, string password = null);
-        Task ListProjectionsAsync();
+        Task<string> GetProjectionResultAsync(string projectionName);
+        Task CreateProjectionAsync(string name, string query);
     }
 }

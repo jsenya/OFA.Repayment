@@ -152,13 +152,27 @@ namespace OFA.DAL.EventStore.DAL
             return false;
         }
 
-        public async Task ListProjectionsAsync()
+        public async Task<string> GetProjectionResultAsync(string projectionName)
         {
             try
             {
                 UserCredentials _creds = new UserCredentials(_username, _password);
+                var result = await _projectionsManager.GetResultAsync(projectionName, _creds);
+                return result;
+            }
+            catch (Exception ex)
+            {
 
-                var result = await _projectionsManager.GetResultAsync("somequery55", _creds);
+                throw ex;
+            }
+        }
+
+        public async Task CreateProjectionAsync(string name, string query)
+        {
+            try
+            {
+                UserCredentials _creds = new UserCredentials(_username, _password);
+                await _projectionsManager.CreateContinuousAsync(name, query, _creds);
             }
             catch (Exception ex)
             {
