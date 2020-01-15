@@ -30,6 +30,7 @@ namespace OFA.Accounts.WM.Messages.Commands
             Debit = debit;
             Credit = credit;
             Details = details;
+            AccountName = $"{custId}/{seasonId.ToString() ?? "ANY"}";
         }
         private IEvent Apply()
         {

@@ -18,6 +18,7 @@ namespace OFA.Accounts.WM.Messages.Events
         public int Balance { get; set; }
         public InitialLedgerEntryCreated(int custId, int seasonId, string accName, int debit, int credit, string details, Guid correlationId)
         {
+            EventId = Guid.NewGuid();
             CorrelationId = correlationId;
             CustomerId = custId;
             SeasonId = seasonId;

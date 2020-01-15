@@ -15,5 +15,7 @@ namespace OFA.Accounts.WM.Test
             => new CustomerSummaryCreatedEventHandler(GetCreateLedgerDebitEntryCommandHandler());
         public static CreateLedgerDebitEntryCommandHandler GetCreateLedgerDebitEntryCommandHandler()
             => new CreateLedgerDebitEntryCommandHandler(GetLedgerRepository());
+        public static CreateInitialLedgerEntryCommandHandler GetCreateInitialLedgerEntryCommandHandler()
+            => new CreateInitialLedgerEntryCommandHandler(GetLedgerRepository());
     }
 }
