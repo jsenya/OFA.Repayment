@@ -8,14 +8,7 @@ namespace OFA.DAL.EventStore
     {
         public static EventData Payload(this IEvent obj)
         {
-            string streamType = "default-unspecified";
-            switch (obj.GetType().Name)
-            {
-                case "CustomerCreated":
-                    streamType = "customer";
-                    break;
-                default: break;
-            }
+            string streamType = obj.GetType().Name;
 
             return new EventData(obj.EventId, streamType, true, obj.ToBytes(), "{}".ToBytes());
         }

@@ -1,5 +1,6 @@
 ﻿using EventStore.ClientAPI;
 using EventStore.ClientAPI.SystemData;
+using EventStore.ClientAPI.Projections;
 using OFA.Common;
 using OFA.Common.Messages.Events;
 using OFA.DAL.EventStore.DAL.IDAL;
@@ -8,12 +9,16 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using static OFA.Common.Helpers;
+using System.Net;
+using EventStore.ClientAPI.Common.Log;
+using System.Linq;
 
 namespace OFA.DAL.EventStore.DAL
 {
     public class OFAEventStore : IOFAEventStore
     {
         private readonly IEventStoreConnection _connection;
+        private readonly ProjectionsManager _projectionsManager;
         public bool IsOpen { get; private set; }
         private readonly Serilog.ILogger _logger;
         public string ConnectionName { get; set; }
@@ -25,6 +30,7 @@ namespace OFA.DAL.EventStore.DAL
             _password = password;
             ConnectionName = connectionName;
             _logger = Log.ForContext<OFAEventStore>();
+            _projectionsManager = new ProjectionsManager(new ConsoleLogger(), new IPEndPoint(IPAddress.Parse("127.0.0.1"), 2113), TimeSpan.FromMilliseconds(5000));
             _connection = EventStoreConnection.Create(new Uri($"tcp://{userName}:{password}@{uri}:{port}"), ConnectionName);
             _connection.Connected += (s, e) =>
             {
@@ -144,6 +150,21 @@ namespace OFA.DAL.EventStore.DAL
             }
 
             return false;
+        }
+
+        public async Task ListProjectionsAsync()
+        {
+            try
+            {
+                UserCredentials _creds = new UserCredentials(_username, _password);
+
+                var result = await _projectionsManager.GetResultAsync("somequery55", _creds);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
         }
     }
 }

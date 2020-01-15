@@ -32,19 +32,25 @@ namespace OFA.Accounts.WM.BgWorker
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            //subscribe to customer summary events
             await _eventStore.SubscribeToStreamAsync("customer-summary", "account-management");
             await _eventStore.SetListenerAsync("customer-summary", "account-management", async (_, x) =>
             {
                 var evt = x.Event.Data.FromBytes<CustomerSummaryCreated>();
-                Console.WriteLine($"processing @ {DateTime.UtcNow} /n-> {JsonConvert.SerializeObject(evt)}");
+                Console.WriteLine($"processing @ {DateTime.UtcNow} \n-> {JsonConvert.SerializeObject(evt)}");
                 await _custSummaryCreatedEH.HandlerAsync(evt);
             });
 
-            //while (!stoppingToken.IsCancellationRequested)
-            //{
-            //    _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-            //    await Task.Delay(1000, stoppingToken);
-            //}
+            //subscribe to account created events
+            await _eventStore.SubscribeToStreamAsync("accounts", "gl-management");
+            await _eventStore.SetListenerAsync("accounts", "gl-management", async (_, x) =>
+            {
+                var evt = x.Event.Data.FromBytes<AccountCreated>();
+                Console.WriteLine($"processing @ {DateTime.UtcNow} \n-> {JsonConvert.SerializeObject(evt)}");
+                //await _custSummaryCreatedEH.HandlerAsync(evt);
+
+                //get summary details
+            });
         }
     }
 }
