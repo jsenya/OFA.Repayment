@@ -1,4 +1,5 @@
 ﻿using OFA.Accounts.WM.CommandHandlers;
+using OFA.Accounts.WM.EventHandlers;
 using OFA.Accounts.WM.Repositories;
 using OFA.DAL.EventStore.DAL;
 
@@ -12,5 +13,7 @@ namespace OFA.Accounts.WM.Test
             => new AccountRepository(GetOFAEventStore());
         public static AccountCreatedCommandHandler GetAccountCreatedCommandHandler()
             => new AccountCreatedCommandHandler(GetAccountRepository());
+        public static CustomerSummaryCreatedEventHandler GetCustomerSummaryCreatedEventHandler()
+            => new CustomerSummaryCreatedEventHandler(GetAccountCreatedCommandHandler());
     }
 }
