@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Accounts.WM", "OFA.Acco
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Accounts.WM.Test", "OFA.Accounts.WM.Test\OFA.Accounts.WM.Test.csproj", "{66B5A839-9D79-43A5-905A-BEE87DD7D665}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OFA.Accounts.WM.BgWorker", "OFA.Accounts.WM.BgWorker\OFA.Accounts.WM.BgWorker.csproj", "{3FCA98FB-0C00-4A03-9575-191B91152684}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{66B5A839-9D79-43A5-905A-BEE87DD7D665}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66B5A839-9D79-43A5-905A-BEE87DD7D665}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66B5A839-9D79-43A5-905A-BEE87DD7D665}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FCA98FB-0C00-4A03-9575-191B91152684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FCA98FB-0C00-4A03-9575-191B91152684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FCA98FB-0C00-4A03-9575-191B91152684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FCA98FB-0C00-4A03-9575-191B91152684}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
