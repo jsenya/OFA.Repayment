@@ -30,5 +30,20 @@ namespace OFA.Accounts.WM.Test.CommandHandlerTests
             //assert
             Assert.True(_task.IsCompleted);
         }
+
+        [Fact]
+        public async Task HandleCreateAccountDefaultedCommandShouldCompleteExecutingWithoutErrors()
+        {
+            //arrange
+            CreateAccount command = new CreateAccount(4, 191, Guid.NewGuid());
+            command.AccountStatus = AccountStatus.DEFAULTED.ToString();
+
+            //act
+            var _task = _handler.HandleAsync(command);
+            await _task;
+
+            //assert
+            Assert.True(_task.IsCompleted);
+        }
     }
 }
