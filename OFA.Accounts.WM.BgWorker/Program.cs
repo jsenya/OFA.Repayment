@@ -28,12 +28,15 @@ namespace OFA.Accounts.WM.BgWorker
                 .ConfigureServices((hostContext, services) =>
                 {
                     var _evStore = new OFAEventStore("admin", "changeit", "localhost", "1113", "test_client");
-                    var _initialLedger = new CreateInitialLedgerEntryCommandHandler(new LedgerRepository(_evStore));
+                    var _ledgerRepo = new LedgerRepository(_evStore);
+                    var _initialLedger = new CreateInitialLedgerEntryCommandHandler(_ledgerRepo);
                     var _custSummaryEH = new CustomerSummaryCreatedEventHandler(_initialLedger);
+                    var _adjustmentEH = new LedgerAdjustmentEntryCreatedEventHandler(_ledgerRepo);
 
                     services.AddHostedService<Worker>();
                     services.AddSingleton<IOFAEventStore>(_evStore);
                     services.AddSingleton<ICustomerSummaryCreatedEventHandler<CustomerSummaryCreated>>(_custSummaryEH);
+                    services.AddSingleton<ILedgerAdjustmentEntryCreatedEventHandler<LedgerAdjustmentEntryCreated>>(_adjustmentEH);
                 });
     }
 }

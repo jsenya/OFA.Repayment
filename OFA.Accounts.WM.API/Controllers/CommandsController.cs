@@ -29,7 +29,7 @@ namespace OFA.Accounts.WM.API.Controllers
             {
                 var command = new CreateLedgerDebitEntry(payment.CustomerID, payment.Amount, 0, 0, "original payment", Guid.NewGuid(), 
                     payment.SeasonID > 0 ? (int?)payment.SeasonID : null);
-                await _ledgerDebitCH.HandleAsync(command);
+                _ledgerDebitCH.HandleAsync(command);
             }
             return Ok("payments have been streamed to the event store.");
         }

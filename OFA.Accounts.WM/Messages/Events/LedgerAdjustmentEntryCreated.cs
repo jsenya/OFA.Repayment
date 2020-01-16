@@ -19,9 +19,6 @@ namespace OFA.Accounts.WM.Messages.Events
 
         public LedgerAdjustmentEntryCreated(int custId, int seasonId, int debit, int credit, int balance, Guid correlationId)
         {
-            if (custId == 0) throw new Exception("Customer id is invalid");
-            if (credit < 0) throw new Exception("Invalid credit amount.");
-
             EventId = Guid.NewGuid();
             CorrelationId = correlationId;
             CustomerId = custId;

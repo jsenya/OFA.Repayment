@@ -2,9 +2,11 @@
 using OFA.Accounts.WM.EventHandlers.IEventHandlers;
 using OFA.Accounts.WM.Messages.Commands;
 using OFA.Accounts.WM.Messages.Events;
+using OFA.Accounts.WM.Projections;
 using OFA.Accounts.WM.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static OFA.Accounts.WM.Helpers;
@@ -33,8 +35,15 @@ namespace OFA.Accounts.WM.CommandHandlers
                 int balance = 0;
                 if(_entry.items.Length > 0)
                 {
-                    balance = CalculateRunningBalance(command.Debit, command.Credit, _entry.items[0].Balance);
-                    command.SeasonId = command.SeasonId ?? _entry.items[0].SeasonId;
+                    Entry entry = null;
+
+                    if (command.SeasonId != null)
+                        entry = _entry.items.Where(q => q.SeasonId == command.SeasonId).FirstOrDefault();
+
+                    entry = entry ?? _entry.items[0];
+
+                    balance = CalculateRunningBalance(command.Debit, command.Credit, entry.Balance);
+                    command.SeasonId = command.SeasonId ?? entry.SeasonId;
                 }
 
                 if(balance >= 0)
